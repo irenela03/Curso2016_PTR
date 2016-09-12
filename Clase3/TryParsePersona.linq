@@ -1,8 +1,7 @@
 <Query Kind="Program">
-  <Reference>F:\CURSO_2016_01\src\Clases_1_a_6\Utiles\bin\Debug\Utiles.dll</Reference>
+  <Reference Relative="..\Clases_1_a_6\Utiles\bin\Debug\Utiles.dll">F:\CURSO_2016_01\src\Clases_1_a_6\Utiles\bin\Debug\Utiles.dll</Reference>
   <Namespace>Utiles</Namespace>
 </Query>
-
 
 public class Persona
 {
@@ -14,28 +13,38 @@ public class Persona
 void Main()
 {
   Persona p1, p2;
+  string input1, input2;
+  
+  input1 = "Homero Simpson; 01/10/1960 ; 188758789";
+  input2 = "Abraham Simpson; 01/10/1860 ; 758789";
+
+/*
+  string prueba = "Campo 1 ; Campo 2 ; Campo 3 ; Campo 4 ; Campo 5";
+  prueba.Campos().Dump(); //  retorna 5
+  Console.WriteLine("[{0}]", prueba.GetCampo(3));  // retorna [ Campo 3 ]
+*/
 
   //  p1 deberia contener un valor correcto
   //  p2 deberia contener null
-
-  if (TryParsePersona("Homero Simpson; 01/10/1960 ; 188758789", out p1))
+  
+  if (TryParsePersona(input1, out p1))
   {
-    Console.WriteLine("p1 creada con exito");
+    Console.WriteLine("p1 creada con exito a partir de ==> [{0}]", input1);
     p1.Dump();
   }
   else
   {
-    Console.WriteLine("Error al crear p1 --> {0}", p1);
+    Console.WriteLine("Error al crear p1 a partir de --> [{0}]", input1);
   }
   
-  if (TryParsePersona("Abraham Simpson; 01/10/1860 ; 758789", out p2))
+  if (TryParsePersona(input2, out p2))
   {
-    Console.WriteLine("p2 creada con exito");
+    Console.WriteLine("p2 creada con exito a partir de ==> [{0}]", input2);
     p1.Dump();
   }
   else
   {
-    Console.WriteLine("Error al crear p2 --> {0}", p2);
+    Console.WriteLine("Error al crear p2 a partir de --> [{0}]", input2);
   }
 }
 
@@ -82,4 +91,3 @@ public bool TryParsePersona(string input, out Persona result)
   
   return exito;
 }
-
