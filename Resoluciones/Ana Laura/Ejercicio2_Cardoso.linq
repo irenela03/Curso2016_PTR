@@ -1,11 +1,11 @@
 <Query Kind="Program">
-  <Reference Relative="..\CSV.dll">C:\Users\cardosoalaura\UTN\Curso C#\CSV.dll</Reference>
+  <Reference Relative="CSV.dll">F:\CURSO_2016_01\src\Resoluciones\Ana Laura\CSV.dll</Reference>
   <Namespace>CSV</Namespace>
 </Query>
 
 void Main()
 {
-    string fileName =@"C:\Users\cardosoalaura\UTN\Curso C#\Clima en Rosario.csv";
+    string fileName =@"F:\CURSO_2016_01\src\Resoluciones\Ana Laura\Clima en Rosario.csv";
     FileInfo fi = new FileInfo(fileName);
 
     if (fi.Exists)

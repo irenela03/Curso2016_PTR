@@ -1,12 +1,13 @@
 <Query Kind="Program">
-  <Reference Relative="Curso2016_PTR-master1\Curso2016_PTR-master\Clases_1_a_6\CSV\bin\Debug\CSV.dll">C:\Users\GQ\Desktop\curso_2016\Curso2016_PTR-master1\Curso2016_PTR-master\Clases_1_a_6\CSV\bin\Debug\CSV.dll</Reference>
+  <Reference Relative="CSV.dll">F:\CURSO_2016_01\src\Resoluciones\Guillermo\CSV.dll</Reference>
   <Namespace>CSV</Namespace>
 </Query>
 
 void Main()
 {
-	FileInfo fi = new FileInfo(@"C:\Users\GQ\Desktop\curso_2016\Clima en Rosario.csv");
-	if (fi.Exists)
+  //  FileInfo fi = new FileInfo(@"C:\Users\GQ\Desktop\curso_2016\Clima en Rosario.csv");
+  FileInfo fi = new FileInfo(@"F:\CURSO_2016_01\src\Resoluciones\Guillermo\Clima en Rosario.csv");
+  if (fi.Exists)
   	{  
 		CSV.CSVFile csv = new CSV.CSVFile(fi);
 		Console.WriteLine($"Lineas: {csv.Lineas} ; Max Columnas: {csv.MaxColumnas}");
