@@ -24,5 +24,17 @@ namespace OMB_Desktop
     {
       InitializeComponent();
     }
+
+    private void MostrarLogin(object sender, RoutedEventArgs e)
+    {
+      Views.LoginUserControl loginControl = new Views.LoginUserControl();
+
+      mainContent.Content = loginControl;
+
+      loginControl.LoginOK += (o, user) => {
+        mainContent.Content = null;
+        //  user.Empleado.Persona.Nombres
+      } ;
+    }
   }
 }
