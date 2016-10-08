@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:OMB_Desktop"
         mc:Ignorable="d"
         Title="MainWindow" Height="403" Width="670">
-  <Grid>
+  <DockPanel LastChildFill="True">
+    <Grid DockPanel.Dock="Top" Background="Azure">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"></RowDefinition>
+        <RowDefinition Height="Auto"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"></ColumnDefinition>
+        <ColumnDefinition Width="Auto"></ColumnDefinition>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+      <Button Margin="10" Grid.Column="0" Grid.Row="0" Width="100" Name="btnShowLogin" Click="MostrarLogin">Ingresar</Button>
+      <Button Margin="10" Grid.Column="0" Grid.Row="1" Width="100">Logout</Button>
+      <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <TextBox Margin="10" Width="250"></TextBox>
+        <Button Margin="10">Buscar</Button>
+      </StackPanel>
+    </Grid>
+    <ContentControl Name="mainContent">
 
-  </Grid>
+    </ContentControl>
+  </DockPanel>
 </Window>

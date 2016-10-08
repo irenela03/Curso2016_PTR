@@ -1,4 +1,4 @@
-﻿#define PASO8
+﻿#define PASO_8
 
 using System;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace TestDatabase
       if (ctx.Database.Exists())
         Console.WriteLine("La base esta!");
 
-#if PASO1
+#if PASO_1
       //  PASO 1 - Crear root categoty (Libros)
       //
       Categoria root = new Categoria() {Nombre = "Libros"};
@@ -45,7 +45,7 @@ namespace TestDatabase
 
 
 
-#if PASO2
+#if PASO_2
       //  PASO 2 - Crear categoria hijas (Informatica) [primero obtengo la root y luego creo las child]
       //
       Categoria root = (from cat in ctx.Categorias where cat.Nombre == "Libros" select cat).FirstOrDefault();
@@ -78,7 +78,7 @@ namespace TestDatabase
       ctx.SaveChanges();
 #endif
 
-#if PASO2_5
+#if PASO_2_5
       //  PASO 2 y MEDIO - Crear categorias hijas de una subcategoria...
       //
       Categoria @base = (from cat in ctx.Categorias where cat.Nombre == "Informatica" select cat).FirstOrDefault();
@@ -104,7 +104,7 @@ namespace TestDatabase
 #endif
 
 
-#if PASO3
+#if PASO_3
       //  PASO 3 - Chequear relaciones!! FULL
 
       //  Categoria root = (from cat in ctx.Categorias.Include("SubCategorias") where cat.Nombre == "Libros" select cat).FirstOrDefault();
@@ -130,7 +130,7 @@ namespace TestDatabase
 
 #endif
 
-#if PASO4
+#if PASO_4
       //  PASO 4 - Ingreso de los Tipos de Documentos
       //
       TipoDocumento tipo = new TipoDocumento() {Descripcion = "DNI"};
@@ -152,7 +152,7 @@ namespace TestDatabase
       ctx.SaveChanges();
 #endif
 
-#if PASO4_5
+#if PASO_4_5
       //  PASO 4_5 - testeamos algunas provincias y localidades...
       var localidades = ctx.Localidades.Where(loc => loc.Nombre.Contains("martin"));
 
@@ -177,7 +177,7 @@ namespace TestDatabase
 
 #endif
 
-#if PASO4_5_1
+#if PASO_4_5_1
       //
       //  Crear nueva Provincia y nueva Localidad
       //  esto normalmente no se haria, pero vemos si funciona (despues borrar desde la DB)
@@ -204,7 +204,7 @@ namespace TestDatabase
       ctx.SaveChanges();
 #endif
 
-#if PASO5
+#if PASO_5
       //  PASO 5 - Ingreso de algunas personas
       //
       Persona newPersona;
@@ -256,7 +256,7 @@ namespace TestDatabase
       ctx.SaveChanges();
 #endif
 
-#if PASO6
+#if PASO_6
       //  Agregamos info de contacto
       //
       Persona persona = null;     //  TODO Traer una Persona desde la base de datos
@@ -320,7 +320,7 @@ namespace TestDatabase
       }
 #endif
 
-#if PASO7
+#if PASO_7
       //  Agregamos Empleado asociado a Persona
       //
       Persona persona = ctx.Personas.FirstOrDefault(per => per.Apellidos == "Thedy");
@@ -339,7 +339,7 @@ namespace TestDatabase
       }
 #endif
 
-#if PASO8
+#if PASO_8
       //  Creamos un usuario y utilizamos el servicio para crearlo con su password
       //
       Empleado empleado = ctx.Empleados.FirstOrDefault(emp => emp.Legajo == "167055");

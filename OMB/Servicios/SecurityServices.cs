@@ -50,6 +50,8 @@ namespace Servicios
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
+
+        result = false;
       }
 
       return result;
@@ -64,7 +66,10 @@ namespace Servicios
     /// <returns></returns>
     public Usuario LoginUsuario(string login, string password)
     {
-      return null;
+      //  TODO usar el metodo GetUserPasswordInternal para validar la password
+      //  TODO setear los datos de ultimo login correcto o no, validar en la DB
+      //  return null;
+      return new Usuario();
     }
 
     /// <summary>
@@ -100,8 +105,24 @@ namespace Servicios
       return result;
     }
 
+    /// <summary>
+    /// Lo mismo, en una DB deberiamos tener un stored que haga este proceso
+    /// </summary>
+    /// <param name="login"></param>
+    /// <returns></returns>
     private string GetUserPasswordInternal(string login)
     {
+      string passTemp = null;
+      try
+      {
+        passTemp = OMBContext.DB.Database
+                    .SqlQuery<string>("select Password from Usuarios where Login = @p0", login)
+                    .FirstOrDefault();
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("No se puede recuperar la contraseña");
+      }
       return null;
     }
   }
