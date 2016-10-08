@@ -78,7 +78,11 @@ ipch/
 *.ncb
 *.opendb
 *.opensdf
-#*.sdf
+#
+#   Dejamos que los SDF se repliquen para tener siempre la base de datos actualizada
+#   Si se hace muy lento, siempre podemos ignorarlo o excluirlo
+#
+# *.sdf
 *.cachefile
 *.VC.db
 
