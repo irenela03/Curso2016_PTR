@@ -12,10 +12,11 @@ namespace Servicios
   public class SecurityServices
   {
     /// <summary>
-    /// 
+    /// Este metodo permite crear un usuario en la DB, usando los datos ingresados desde la UI mas la password
+    /// Si no se puede crear, retornamos false
     /// </summary>
-    /// <param name="user"></param>
-    /// <param name="pass"></param>
+    /// <param name="user">Instancia ya creada de Usuario con los datos obligatorios y validos</param>
+    /// <param name="pass">Contraseña en </param>
     public bool CrearUsuario(Usuario user, string pass)
     {
       bool result = true;
@@ -23,7 +24,7 @@ namespace Servicios
 
       try
       {
-        //  forzamos hasta que no podamos cambiar la password...
+        //  Forzamos que el usuario no pueda hacer nada hasta setear la password...
         user.Enabled = false;
         user.Blocked = true;
 
