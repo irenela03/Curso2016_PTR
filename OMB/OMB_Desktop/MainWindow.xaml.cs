@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OMB_Desktop.ViewModels;
 
 namespace OMB_Desktop
 {
@@ -20,6 +21,8 @@ namespace OMB_Desktop
   /// </summary>
   public partial class MainWindow : Window
   {
+    private ViewModels.LoginViewModel vm;
+
     public MainWindow()
     {
       InitializeComponent();
@@ -27,6 +30,7 @@ namespace OMB_Desktop
 
     private void MostrarLogin(object sender, RoutedEventArgs e)
     {
+      /*
       Views.LoginUserControl loginControl = new Views.LoginUserControl();
 
       mainContent.Content = loginControl;
@@ -35,6 +39,9 @@ namespace OMB_Desktop
         mainContent.Content = null;
         //  user.Empleado.Persona.Nombres
       } ;
+      */
+      vm = new LoginViewModel();
+
     }
   }
 }
