@@ -4,9 +4,6 @@
              xmlns:local="clr-namespace:OMB_Desktop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         <Style x:Key="BotonStandard" TargetType="{x:Type Button}">
-           <Setter Property="Control.Width" Value="100"></Setter>
-           <Setter Property="FontFamily" Value="Consolas"></Setter>
-         </Style>
+         
     </Application.Resources>
 </Application>

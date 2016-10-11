@@ -19,49 +19,6 @@ select * from Categorias where Categoria_Up is not null
 
 delete from Categorias where Parent_CategoriaID is not null
 
-
-create table Editoriales
-(
-	ID_Editorial					uniqueidentifier			not null,
-	Nombre							nvarchar(150)				not null,
-	Domicilio						nvarchar(150),
-	AmpliacionDomicilio				nvarchar(150),
-	CodigoPostal					nvarchar(20),
-	ID_Localidad					int,
-	--
-	--	constraints
-	--
-	constraint PK_Editoriales primary key (ID_Editorial),
-	constraint FK_Editoriales_Localidades foreign key (ID_Localidad) references Localidades (ID_Localidad)
-)
-
-/*
-
-	DatosEnvio por ahora vamos a incluir alguna informacion como tamaño y peso del item
-	
-*/
-create table Libros
-(
-	ID_Libro					uniqueidentifier			not null,
-	ISBN						nchar(13)					not null,
-	ISBN10						nchar(10),
-	Titulo						nvarchar(150),				
-	Subtitulo					nvarchar(150),
-	FechaPublicacion			datetime,
-	Paginas						int,
-	DatosEnvio					nvarchar(300),
-	Portada						image,
-	ID_Editorial				uniqueidentifier,
-	--
-	--	constraints
-	--
-	constraint PK_Libros primary key (ID_Libro),
-	constraint FK_Libros_Editoriales foreign key (ID_Editorial) references Editoriales (ID_Editorial),
-	constraint UK_ISBN unique (ISBN),
-	constraint UK_ISBN10 unique (ISBN10)
-)
-
-
 /*
 	Consulta con easter-loading para obtener una categoria CON TODAS sus SubCategorias
 	Observar el WHERE con 'Libros' que hay 

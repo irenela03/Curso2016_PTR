@@ -22,50 +22,38 @@ namespace Servicios
       bool result = true;
       OMBContext ctx = OMBContext.DB;
 
-      if (!ValidarUsuario(user))
+      try
       {
-        Console.WriteLine("No se pudo validar el usuario segun las reglas...");
-        result = false;
-      }
-      else
-      {
-        try
-        {
-          //  Forzamos que el usuario no pueda hacer nada hasta setear la password...
-          user.Enabled = false;
-          user.Blocked = true;
+        //  Forzamos que el usuario no pueda hacer nada hasta setear la password...
+        user.Enabled = false;
+        user.Blocked = true;
 
-          ctx.Usuarios.Add(user);
+        ctx.Usuarios.Add(user);
+        ctx.SaveChanges();
+
+        if (!ChangeUserPasswordInternal(user.Login, pass))
+        {
+          Console.WriteLine("No se pudo cambiar la password!!! Eliminando el usuario...");
+
+          ctx.Usuarios.Remove(user);
           ctx.SaveChanges();
-
-          if (!ChangeUserPasswordInternal(user.Login, pass))
-          {
-            Console.WriteLine("No se pudo cambiar la password!!! Eliminando el usuario...");
-
-            ctx.Usuarios.Remove(user);
-            ctx.SaveChanges();
-
-            result = false;
-          }
-          else
-          {
-            user.Enabled = true;
-            user.Blocked = false;
-            //
-            //  Aca podriamos setear algun token para que el usuario valide su cuenta desde la web
-            //  mas que nada pensando en MVC aunque no se aplicaria tal vez para un usuario interno
-            //  (o sea asociado a un Empleado)
-            //
-            ctx.SaveChanges();
-          }
-        }
-        catch (Exception ex)
-        {
-          Console.WriteLine(ex.Message);
 
           result = false;
         }
+        else
+        {
+          user.Enabled = true;
+          user.Blocked = false;
+          ctx.SaveChanges();
+        }
       }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+
+        result = false;
+      }
+
       return result;
     }
 
@@ -89,7 +77,7 @@ namespace Servicios
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
-    private bool ValidarUsuario(Usuario user)
+    public bool ValidarUsuario(Usuario user)
     {
       //  TODO verificar que el login no este repetido
       //  TODO Asegurar que no se generen dos usuarios para un mismo Empleado
@@ -108,7 +96,6 @@ namespace Servicios
 
       try
       {
-        //  TODO incorporar hashing de password para proteger la informacion del usuario
         OMBContext.DB.Database.ExecuteSqlCommand("update Usuarios set Password = @p1 where Login = @p0", login, pass);
       }
       catch (Exception ex)
@@ -126,10 +113,8 @@ namespace Servicios
     private string GetUserPasswordInternal(string login)
     {
       string passTemp = null;
-
       try
       {
-        //  TODO incorporar hashing para comparar con la que obtenemos de la tabla
         passTemp = OMBContext.DB.Database
                     .SqlQuery<string>("select Password from Usuarios where Login = @p0", login)
                     .FirstOrDefault();
