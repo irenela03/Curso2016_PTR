@@ -23,16 +23,18 @@
         <ColumnDefinition Width="*"></ColumnDefinition>
       </Grid.ColumnDefinitions>
       <Button Margin="10" VerticalAlignment="Center" Height="30" Padding="5" 
-              Grid.Column="0" Grid.Row="0" Style="{StaticResource BotonStandard}" 
+              Grid.Column="0" Grid.Row="0" Style="{StaticResource BotonStandard}"  
               Name="btnShowLogin" Click="MostrarLogin">Ingresar</Button>
       <Button Margin="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" 
               Width="{Binding ElementName=btnShowLogin, Path=Width}"
               Height="{Binding ElementName=btnShowLogin, Path=Height}">Logout</Button>
       <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" >
         <TextBox Margin="10" Width="250"></TextBox>
-        <Button Margin="10">Buscar</Button>
+        <Button Margin="10"
+                Height="{Binding ElementName=btnShowLogin, Path=Height}">Buscar</Button>
       </StackPanel>
     </Grid>
+    
     <ContentControl Name="mainContent">
 
     </ContentControl>

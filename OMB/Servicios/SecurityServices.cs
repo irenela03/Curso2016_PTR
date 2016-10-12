@@ -11,6 +11,7 @@ namespace Servicios
 {
   public class SecurityServices
   {
+    public string ErrorInfo { get; set; }
     /// <summary>
     /// Este metodo permite crear un usuario en la DB, usando los datos ingresados desde la UI mas la password
     /// Si no se puede crear, retornamos false
@@ -24,7 +25,7 @@ namespace Servicios
 
       if (!ValidarUsuario(user))
       {
-        Console.WriteLine("No se pudo validar el usuario segun las reglas...");
+        ErrorInfo = "No se pudo validar el usuario segun las reglas...";
         result = false;
       }
       else
@@ -40,7 +41,7 @@ namespace Servicios
 
           if (!ChangeUserPasswordInternal(user.Login, pass))
           {
-            Console.WriteLine("No se pudo cambiar la password!!! Eliminando el usuario...");
+            ErrorInfo = "No se pudo cambiar la password!!! Eliminando el usuario...";
 
             ctx.Usuarios.Remove(user);
             ctx.SaveChanges();
@@ -136,6 +137,7 @@ namespace Servicios
       }
       catch (Exception ex)
       {
+        //  TODO Lanzar excepcion???
         Console.WriteLine("No se puede recuperar la contraseña");
       }
       return null;

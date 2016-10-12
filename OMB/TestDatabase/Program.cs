@@ -1,4 +1,4 @@
-﻿#define PASO_4_5
+﻿#define PASO_8
 
 using System;
 using System.Collections.Generic;
@@ -259,7 +259,7 @@ namespace TestDatabase
 #if PASO_6
       //  Agregamos info de contacto
       //
-      Persona persona = null;     //  TODO Traer una Persona desde la base de datos
+      Persona persona = ctx.Personas.Where(per => per.Apellidos == "Thedy").FirstOrDefault() ;     //  TODO Traer una Persona desde la base de datos
       List<TipoContacto> tipos = ctx.TiposContacto.ToList();
 
       if (persona != null)
@@ -291,6 +291,13 @@ namespace TestDatabase
               string comentario = Console.ReadLine();
 
               //  TODO Agregar el nuevo contacto a la Persona
+              Contacto nuevoContacto = new Contacto();
+
+              nuevoContacto.Dato = dato;
+              nuevoContacto.Comentario = string.IsNullOrWhiteSpace(comentario) ? null : comentario;
+              nuevoContacto.Tipo = tipos[numOpcion];
+
+              persona.InfoContacto.Add(nuevoContacto);
             }
             else
             {
@@ -305,8 +312,10 @@ namespace TestDatabase
         if (ctx.ChangeTracker.HasChanges())
         {
           Console.WriteLine("Guardando info de contacto");
-          //  ctx.MostrarCambios();
-          //  Console.ReadLine();
+
+          ctx.MostrarCambios();
+          Console.ReadLine();
+
           ctx.SaveChanges();
         }
         else
@@ -350,20 +359,13 @@ namespace TestDatabase
       user.Empleado = empleado;
       user.Blocked = false;
 
-      if (seg.ValidarUsuario(user))
+      if (seg.CrearUsuario(user, "12345678"))
       {
-        if (seg.CrearUsuario(user, "12345678"))
-        {
-          Console.WriteLine("Usuario creado correctamente");
-        }
-        else
-        {
-          Console.WriteLine("Error al crear el usuario");
-        }
+        Console.WriteLine("Usuario creado correctamente");
       }
       else
       {
-        Console.WriteLine("Fallo la validacion del usuario");
+        Console.WriteLine("Error al crear el usuario");
       }
 
 #endif

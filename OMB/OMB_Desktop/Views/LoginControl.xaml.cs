@@ -19,13 +19,13 @@ using Entidades;
 namespace OMB_Desktop.Views
 {
   /// <summary>
-  /// Interaction logic for LoginUserControl.xaml
+  /// Interaction logic for LoginControl.xaml
   /// </summary>
-  public partial class LoginUserControl : UserControl
+  public partial class LoginControl : UserControl
   {
     public event EventHandler<Usuario> LoginOK;
 
-    public LoginUserControl()
+    public LoginControl()
     {
       InitializeComponent();
     }

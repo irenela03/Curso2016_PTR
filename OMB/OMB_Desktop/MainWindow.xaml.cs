@@ -21,7 +21,7 @@ namespace OMB_Desktop
   /// </summary>
   public partial class MainWindow : Window
   {
-    private ViewModels.LoginViewModel vm;
+    //private ViewModels.LoginViewModel vm;
 
     public MainWindow()
     {
@@ -30,8 +30,8 @@ namespace OMB_Desktop
 
     private void MostrarLogin(object sender, RoutedEventArgs e)
     {
-      /*
-      Views.LoginUserControl loginControl = new Views.LoginUserControl();
+      
+      Views.LoginControl loginControl = new Views.LoginControl();
 
       mainContent.Content = loginControl;
 
@@ -39,8 +39,8 @@ namespace OMB_Desktop
         mainContent.Content = null;
         //  user.Empleado.Persona.Nombres
       } ;
-      */
-      vm = new LoginViewModel();
+      
+      //  vm = new LoginViewModel();
 
     }
   }
