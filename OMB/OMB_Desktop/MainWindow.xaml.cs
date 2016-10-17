@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using OMB_Desktop.ViewModels;
 
 namespace OMB_Desktop
 {
@@ -21,8 +20,6 @@ namespace OMB_Desktop
   /// </summary>
   public partial class MainWindow : Window
   {
-    //private ViewModels.LoginViewModel vm;
-
     public MainWindow()
     {
       InitializeComponent();
@@ -37,11 +34,9 @@ namespace OMB_Desktop
 
       loginControl.LoginOK += (o, user) => {
         mainContent.Content = null;
-        //  user.Empleado.Persona.Nombres
+        //
+        //  setear el usuario para poder mostrarlo en la UI
       } ;
-      
-      //  vm = new LoginViewModel();
-
     }
   }
 }

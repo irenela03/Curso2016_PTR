@@ -1,10 +1,11 @@
-﻿#define PASO_8
+﻿#define PASO_9
 
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -256,10 +257,32 @@ namespace TestDatabase
       ctx.SaveChanges();
 #endif
 
+#if PASO_5_5
+      //  Modificar propiedades de alguna persona
+      Persona persona = ctx.Personas.Where(per => per.Apellidos == "Thedy").First();
+
+      persona.AmpliacionDomicilio = "Es el edificio de la esquina";
+
+      if (ctx.ChangeTracker.HasChanges())
+      {
+        Console.WriteLine("Guardando info de contacto");
+
+        ctx.MostrarCambios();
+        Console.ReadLine();
+
+        ctx.SaveChanges();
+      }
+      else
+      {
+        Console.WriteLine("No se detectaron cambios");
+      }
+#endif
+
 #if PASO_6
       //  Agregamos info de contacto
       //
-      Persona persona = ctx.Personas.Where(per => per.Apellidos == "Thedy").FirstOrDefault() ;     //  TODO Traer una Persona desde la base de datos
+      //  TODO Traer una Persona desde la base de datos
+      Persona persona = ctx.Personas.Where(per => per.Apellidos == "Thedy").FirstOrDefault() ;     
       List<TipoContacto> tipos = ctx.TiposContacto.ToList();
 
       if (persona != null)
@@ -370,6 +393,12 @@ namespace TestDatabase
 
 #endif
 
+#if PASO_9
+
+      //  TODO agregar codigo para ingresar con el ID y password que asignamos a nuestro usuario
+
+#endif
+
       /*
             Categoria newCat = new Categoria() {Nombre = "Informatica", Parent = parent};
 
@@ -387,6 +416,7 @@ namespace TestDatabase
 
             Console.WriteLine(showCat?.CategoriaID.ToString());
       */
+      Console.WriteLine("Press Any Key To Continue...");
       Console.ReadLine();
 
       ctx.Dispose();

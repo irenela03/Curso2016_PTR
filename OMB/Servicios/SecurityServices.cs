@@ -11,10 +11,14 @@ namespace Servicios
 {
   public class SecurityServices
   {
+    /// <summary>
+    /// Propiedad para retornar el ultimo mensaje de error cuando alguno de los metodos falla
+    /// </summary>
     public string ErrorInfo { get; set; }
+
     /// <summary>
     /// Este metodo permite crear un usuario en la DB, usando los datos ingresados desde la UI mas la password
-    /// Si no se puede crear, retornamos false
+    /// Si no se puede crear, retornamos false y actualiza ErrorInfo
     /// </summary>
     /// <param name="user">Instancia ya creada de Usuario con los datos obligatorios y validos</param>
     /// <param name="pass">Contraseña en </param>
@@ -79,10 +83,12 @@ namespace Servicios
     /// <returns></returns>
     public Usuario LoginUsuario(string login, string password)
     {
-      //  TODO usar el metodo GetUserPasswordInternal para validar la password
-      //  TODO setear los datos de ultimo login correcto o no, validar en la DB
-      //  return null;
-      return new Usuario();
+      Usuario result = null;
+
+      //  TODO Usar el metodo ValidateUserPasswordInternal para validar la combinacion user/password
+      //  TODO Sabiendo que la combinacion es valida, obtenemos los datos del usuario desde EF como hariamos normalmente
+      //  TODO Actualizar los datos de ultimo login correcto o no, guardar cambios!!
+      return result;
     }
 
     /// <summary>
@@ -120,27 +126,35 @@ namespace Servicios
     }
 
     /// <summary>
+    /// Permite validar contra la database la existencia de una combinacion valida de usuario-password
     /// Lo mismo, en una DB deberiamos tener un stored que haga este proceso
     /// </summary>
     /// <param name="login"></param>
+    /// <param name="pass"></param>
     /// <returns></returns>
-    private string GetUserPasswordInternal(string login)
+    private bool ValidateUserPasswordInternal(string login, string pass)
     {
-      string passTemp = null;
-
+      bool result = true;
       try
       {
         //  TODO incorporar hashing para comparar con la que obtenemos de la tabla
-        passTemp = OMBContext.DB.Database
-                    .SqlQuery<string>("select Password from Usuarios where Login = @p0", login)
+        int cuenta = OMBContext.DB.Database
+                    .SqlQuery<int>("select count(*) from Usuarios where Login = @p0 and Password = @p1", login, pass)
                     .FirstOrDefault();
+
+        if (cuenta == 0)
+        {
+          ErrorInfo = "No existe una combinacion valida de credenciales";
+          result = false;
+        }
       }
       catch (Exception ex)
       {
         //  TODO Lanzar excepcion???
-        Console.WriteLine("No se puede recuperar la contraseña");
+        ErrorInfo = "Error al intentar acceder a la tabla de usuarios";
+        result = false;
       }
-      return null;
+      return result;
     }
   }
 }
