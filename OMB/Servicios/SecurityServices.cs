@@ -84,8 +84,21 @@ namespace Servicios
     public Usuario LoginUsuario(string login, string password)
     {
       Usuario result = null;
-
-      //  TODO Usar el metodo ValidateUserPasswordInternal para validar la combinacion user/password
+      OMBContext ctx = OMBContext.DB;
+      result = ctx.Usuarios.Where(us => us.Login == login).FirstOrDefault();
+            if (ValidateUserPasswordInternal(login, password))
+            {
+                result.LastSuccessLogin = DateTime.Now;
+               ctx.SaveChanges();        
+            }
+            else
+            {
+                result.LastFailLogin = DateTime.Now;
+                ctx.SaveChanges();
+                result = null;
+            }
+      
+           //  TODO Usar el metodo ValidateUserPasswordInternal para validar la combinacion user/password
       //  TODO Sabiendo que la combinacion es valida, obtenemos los datos del usuario desde EF como hariamos normalmente
       //  TODO Actualizar los datos de ultimo login correcto o no, guardar cambios!!
       return result;
@@ -98,6 +111,12 @@ namespace Servicios
     /// <returns></returns>
     private bool ValidarUsuario(Usuario user)
     {
+            OMBContext ctx = OMBContext.DB;
+            Usuario Usuario = ctx.Usuarios.FirstOrDefault(us => us.Empleado.Legajo == user.Empleado.Legajo);
+            if (Usuario != null)
+            {
+                return false;
+            }
       //  TODO verificar que el login no este repetido
       //  TODO Asegurar que no se generen dos usuarios para un mismo Empleado
       return true;

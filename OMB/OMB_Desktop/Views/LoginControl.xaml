@@ -21,7 +21,7 @@
       <PasswordBox Width="150" Name="txtPassword"></PasswordBox>
     </StackPanel>
     <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
-      <Button Margin="10" Click="LoginUser" Style="{StaticResource BotonLogin}">Login</Button>
+      <Button Margin="10" Click="LoginUser" Style="{StaticResource BotonLogin}" Height="26" Width="106">Login</Button>
     </StackPanel>
   </StackPanel>
 </UserControl>

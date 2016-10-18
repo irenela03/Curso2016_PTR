@@ -6,37 +6,45 @@
         xmlns:local="clr-namespace:OMB_Desktop"
         mc:Ignorable="d"
         Title="MainWindow" Height="403" Width="670">
-  <Window.Resources>
-    <Style TargetType="{x:Type Button}">
-      <Setter Property="Width" Value="150"></Setter>
-    </Style>
-  </Window.Resources>
-  <DockPanel LastChildFill="True">
-    <Grid DockPanel.Dock="Top" Background="Azure">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"></RowDefinition>
-        <RowDefinition Height="Auto"></RowDefinition>
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto"></ColumnDefinition>
-        <ColumnDefinition Width="Auto"></ColumnDefinition>
-        <ColumnDefinition Width="*"></ColumnDefinition>
-      </Grid.ColumnDefinitions>
-      <Button Margin="10" VerticalAlignment="Center" Height="30" Padding="5" 
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="150"></Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <Grid DockPanel.Dock="Top" Background="Azure">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Margin="10" VerticalAlignment="Center" Height="30" Padding="5" 
               Grid.Column="0" Grid.Row="0" Style="{StaticResource BotonStandard}"  
               Name="btnShowLogin" Click="MostrarLogin">Ingresar</Button>
-      <Button Margin="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" 
+            <Button Margin="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" 
               Width="{Binding ElementName=btnShowLogin, Path=Width}"
               Height="{Binding ElementName=btnShowLogin, Path=Height}">Logout</Button>
-      <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" >
-        <TextBox Margin="10" Width="250"></TextBox>
-        <Button Margin="10"
-                Height="{Binding ElementName=btnShowLogin, Path=Height}">Buscar</Button>
-      </StackPanel>
-    </Grid>
-    
-    <ContentControl Name="mainContent">
+            <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" >
+                <TextBox Margin="10" Width="250"></TextBox>
+                <Button x:Name="btnBuscar" Margin="10"
+                Width="{Binding ElementName=btnShowLogin, Path=Width}"
+                Height="{Binding ElementName=btnShowLogin, Path=Height}">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFF1F1F1" Offset="0"/>
+                            <GradientStop Color="#FFF09C9C" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Buscar
+                </Button>
+            </StackPanel>
+        </Grid>
 
-    </ContentControl>
-  </DockPanel>
+        <ContentControl Name="mainContent">
+
+        </ContentControl>
+    </DockPanel>
 </Window>

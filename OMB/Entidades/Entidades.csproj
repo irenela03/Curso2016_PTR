@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Categoria.cs" />
     <Compile Include="Contacto.cs" />
+    <Compile Include="Editorial.cs" />
     <Compile Include="Empleado.cs" />
+    <Compile Include="Libro.cs" />
     <Compile Include="Localidad.cs" />
     <Compile Include="Perfil.cs" />
     <Compile Include="Persona.cs" />

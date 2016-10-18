@@ -1,4 +1,4 @@
-﻿#define PASO_9
+﻿#define PASO_8
 
 using System;
 using System.Collections.Generic;
@@ -355,16 +355,16 @@ namespace TestDatabase
 #if PASO_7
       //  Agregamos Empleado asociado a Persona
       //
-      Persona persona = ctx.Personas.FirstOrDefault(per => per.Apellidos == "Thedy");
+      Persona persona = ctx.Personas.FirstOrDefault(per => per.Apellidos == "Acosta");
 
       if (persona != null)
       {
         Empleado nuevo = new Empleado();
 
         nuevo.Persona = persona;
-        nuevo.Legajo = "167055";
-        nuevo.CUIT = "20-18339577-8";
-        nuevo.FechaIngreso = new DateTime(1986, 12, 9);
+        nuevo.Legajo = "160675";
+        nuevo.CUIT = "27-24386549-8";
+        nuevo.FechaIngreso = new DateTime(2009, 10, 6);
 
         ctx.Empleados.Add(nuevo);
         ctx.SaveChanges();
@@ -374,11 +374,11 @@ namespace TestDatabase
 #if PASO_8
       //  Creamos un usuario y utilizamos el servicio para crearlo con su password
       //
-      Empleado empleado = ctx.Empleados.FirstOrDefault(emp => emp.Legajo == "167055");
+      Empleado empleado = ctx.Empleados.FirstOrDefault(emp => emp.Legajo == "160675");
       Usuario user = new Usuario();
       SecurityServices seg = new SecurityServices();
 
-      user.Login = "ethedy1";
+      user.Login = "iacosta";
       user.Empleado = empleado;
       user.Blocked = false;
 
